@@ -1,0 +1,42 @@
+.time-slider {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  align-items: center;
+}
+
+.time-slider .indicator {
+  padding: 0 10px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #333;
+}
+
+.time-slider .indicator.indicator-left {
+  padding-right: 25px;
+}
+
+.time-slider .indicator.indicator-right {
+  padding-left: 25px;
+}
+
+.time-slider .MuiSlider-root {
+  height: 8px;
+}
+
+.time-slider .MuiSlider-root .MuiSlider-rail {
+  background-color: #c8d1ff;
+}
+
+.time-slider .MuiSlider-root .MuiSlider-track {
+  background-color: #3519fb;
+  border-color: #3519fb;
+}
+
+.time-slider .MuiSlider-root .MuiSlider-thumb {
+  background-color: #3519fb;
+  box-shadow: inset 0 0 0 4px #fff, 0px 0px 4px rgba(0, 0, 0, 0.25);
+  height: 22px;
+  width: 22px;
+}

@@ -1,0 +1,22 @@
+.overlay {
+  padding: 32px;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+.overlay > div:first-child,
+.overlay .overlay-right > * {
+  pointer-events: all;
+}
+
+.overlay-right {
+  display: flex;
+  width: 100%;
+  padding-left: 32px;
+  flex-direction: column-reverse;
+}
