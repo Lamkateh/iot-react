@@ -63,9 +63,7 @@ class TimeSlider extends Component {
       return;
     }
 
-    let value;
-
-    // TODO : bug quand les deux thumb sont a une extrémité
+    let value = [min, max];
 
     if (newValue[1] - newValue[0] < minDistance) {
       if (activeThumb === 0) {
