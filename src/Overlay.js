@@ -5,12 +5,21 @@ import Sidebar from "./Sidebar";
 import TimeSlider from "./TimeSlider";
 
 class Overlay extends Component {
+  handleTimeSliderChange = (value) => {
+    this.props.onTimeSliderChange(value);
+  };
+
   render() {
+    const { minDate, maxDate } = this.props;
     return (
       <div className="overlay">
         <Sidebar />
         <div className="overlay-right">
-          <TimeSlider min={1646247748} max={1646298748} />
+          <TimeSlider
+            min={minDate}
+            max={maxDate}
+            onChange={this.handleTimeSliderChange}
+          />
         </div>
       </div>
     );

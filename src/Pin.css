@@ -1,0 +1,14 @@
+.pin {
+  height: 20px;
+  width: 20px;
+  background-color: #3519fb;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pin:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}

@@ -17,6 +17,13 @@ class TimeSlider extends Component {
     this.setState({ min: min, max: max, value: [min, max] });
   }
 
+  componentDidUpdate(prevProps) {
+    const { min, max } = this.props;
+    if (prevProps.min !== min || prevProps.max !== max) {
+      this.setState({ min: min, max: max, value: [min, max] });
+    }
+  }
+
   computeDate = (timestamp) => {
     const { min, max } = this.state;
     const minDate = new Date(min * 1000);
@@ -56,19 +63,26 @@ class TimeSlider extends Component {
       return;
     }
 
+    let value;
+
+    // TODO : bug quand les deux thumb sont a une extrémité
+
     if (newValue[1] - newValue[0] < minDistance) {
       if (activeThumb === 0) {
         if (newValue[1] < max) {
-          this.setState({ value: [newValue[0], newValue[0] + minDistance] });
+          value = [newValue[0], newValue[0] + minDistance];
         }
       } else {
         if (newValue[0] > min) {
-          this.setState({ value: [newValue[1] - minDistance, newValue[1]] });
+          value = [newValue[1] - minDistance, newValue[1]];
         }
       }
     } else {
-      this.setState({ value: newValue });
+      value = newValue;
     }
+
+    this.setState({ value: value });
+    this.props.onChange(value);
   };
 
   render() {
