@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./Overlay.css";
 import Sidebar from "./Sidebar";
 import TimeSlider from "./TimeSlider";
+import Form from "./Form";
 
 class Overlay extends Component {
   handleTimeSliderChange = (value) => {
@@ -20,6 +21,7 @@ class Overlay extends Component {
             max={maxDate}
             onChange={this.handleTimeSliderChange}
           />
+          <Form />
         </div>
       </div>
     );
