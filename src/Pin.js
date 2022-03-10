@@ -2,12 +2,19 @@ import * as React from "react";
 
 import "./Pin.css";
 
-function Pin({ onMouseEnter, onMouseLeave }) {
+function Pin(props) {
+  const handleMouseEnter = () => {
+    props.onMouseEnter(props.index);
+  };
+
+  const handleMouseLeave = () => {
+    props.onMouseLeave();
+  };
   return (
     <div
       className="pin"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     ></div>
   );
 }
