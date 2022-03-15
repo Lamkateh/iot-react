@@ -14,11 +14,16 @@ class Overlay extends Component {
     this.props.onSelectionChange(id);
   };
 
+  handleFormChange = (id) => {
+    this.props.onFormChange(id);
+  };
+
   render() {
     const { minDate, maxDate, groups } = this.props;
     return (
       <div className="overlay">
         <Sidebar
+          onFormChange={this.handleFormChange}
           onSelectionChange={this.handleSelectionChange}
           groups={groups}
         />
@@ -28,7 +33,9 @@ class Overlay extends Component {
             max={maxDate}
             onChange={this.handleTimeSliderChange}
           />
-          <Form />
+          <Form 
+            onFormChange={this.handleFormChange}
+          />
         </div>
       </div>
     );

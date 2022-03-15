@@ -4,6 +4,10 @@ import Button from "./ButtonSidebar";
 import "./Sidebar.css";
 
 class Sidebar extends Component {
+  handleFormClick = () => {
+    this.props.onFormChange();
+  };
+
   handleGroupClick = (id) => {
     this.props.onSelectionChange(id);
   };
@@ -13,7 +17,7 @@ class Sidebar extends Component {
     return (
       <div className="card sidebar">
         <div className="logo">PolyAnalyzer</div>
-        <Button title="+ Ajouter une mesure" className="btn primary" />
+        <Button title="+ Ajouter une mesure" className="btn primary" onClick={this.handleFormClick}/>
         {groups.map(({ id, name }) => (
           <Button
             key={id}
