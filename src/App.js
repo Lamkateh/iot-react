@@ -30,6 +30,7 @@ class App extends Component {
       maxTimeShow: null,
       minTimeShow: null,
       terrain: false,
+      markerLabel: null,
     };
 
     this.mapRef = React.createRef();
@@ -73,6 +74,15 @@ class App extends Component {
     });
   };
 
+  handleMouseEnterPin = (index) => {
+    const { selectedGroup } = this.state;
+
+    this.setState({ markerLabel: selectedGroup.measures[index].values });
+  };
+  handleMouseLeavePin = () => {
+    this.setState({ markerLabel: null });
+  };
+
   markers = () => {
     const { selectedGroup, minTimeShow, maxTimeShow } = this.state;
     const result = selectedGroup.measures
@@ -87,7 +97,11 @@ class App extends Component {
           longitude={measure.values.longitude}
           latitude={measure.values.latitude}
         >
-          <Pin onMouseEnter={() => console.log("hover")} />
+          <Pin
+            index={index}
+            onMouseEnter={this.handleMouseEnterPin}
+            onMouseLeave={this.handleMouseLeavePin}
+          />
         </Marker>
       ));
     return result;
@@ -130,7 +144,7 @@ class App extends Component {
   };
 
   render() {
-    const { selectedGroup, groups, terrain } = this.state;
+    const { selectedGroup, groups, terrain, markerLabel } = this.state;
     return (
       <div id="map">
         <ReactMapGl
@@ -163,6 +177,7 @@ class App extends Component {
           {terrain ? <Layer {...skyLayer} /> : null}
         </ReactMapGl>
         <Overlay
+          markerLabel={markerLabel}
           groups={groups}
           minDate={this.toTimestamp(selectedGroup.start)}
           maxDate={this.toTimestamp(selectedGroup.end)}

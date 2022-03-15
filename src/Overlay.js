@@ -4,6 +4,7 @@ import "./Overlay.css";
 import Sidebar from "./Sidebar";
 import TimeSlider from "./TimeSlider";
 import Form from "./Form";
+import AnalyzeLabel from "./AnalyzeLabel";
 
 class Overlay extends Component {
   handleTimeSliderChange = (value) => {
@@ -19,9 +20,10 @@ class Overlay extends Component {
   };
 
   render() {
-    const { minDate, maxDate, groups } = this.props;
+    const { minDate, maxDate, groups, markerLabel } = this.props;
     return (
       <div className="overlay">
+        {markerLabel ? <AnalyzeLabel values={markerLabel} /> : null}
         <Sidebar
           onFormChange={this.handleFormChange}
           onSelectionChange={this.handleSelectionChange}
