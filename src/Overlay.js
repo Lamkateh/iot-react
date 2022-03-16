@@ -7,6 +7,13 @@ import Form from "./Form";
 import AnalyzeLabel from "./AnalyzeLabel";
 
 class Overlay extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      classForm: "hidden"
+    };
+  }
+
   handleTimeSliderChange = (value) => {
     this.props.onTimeSliderChange(value);
   };
@@ -15,12 +22,13 @@ class Overlay extends Component {
     this.props.onSelectionChange(id);
   };
 
-  handleFormChange = (id) => {
-    this.props.onFormChange(id);
+  handleFormChange = (value) => {
+    this.setState({ classForm: value });
   };
 
   render() {
-    const { minDate, maxDate, groups, markerLabel } = this.props;
+    const { minDate, maxDate, groups, markerLabel, selectedGroupId, averageHumidity, averageTemperature } = this.props;
+    const { classForm } = this.state;
     return (
       <div className="overlay">
         {markerLabel ? <AnalyzeLabel values={markerLabel} /> : null}
@@ -28,6 +36,9 @@ class Overlay extends Component {
           onFormChange={this.handleFormChange}
           onSelectionChange={this.handleSelectionChange}
           groups={groups}
+          selectedGroupId={selectedGroupId}
+          averageTemperature={averageTemperature}
+          averageHumidity={averageHumidity}
         />
         <div className="overlay-right">
           <TimeSlider
@@ -37,6 +48,7 @@ class Overlay extends Component {
           />
           <Form 
             onFormChange={this.handleFormChange}
+            className={classForm}
           />
         </div>
       </div>

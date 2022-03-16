@@ -12,3 +12,8 @@
   font-weight: bold;
   padding: 15px;
 }
+
+.group {
+  display: flex;
+  flex-direction: column;
+}

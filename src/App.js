@@ -31,6 +31,8 @@ class App extends Component {
       minTimeShow: null,
       terrain: false,
       markerLabel: null,
+      averageTemperature: null,
+      averageHumidity: null,
     };
 
     this.mapRef = React.createRef();
@@ -71,6 +73,7 @@ class App extends Component {
         minTimeShow: this.toTimestamp(response.data.data.start),
         maxTimeShow: this.toTimestamp(response.data.data.end),
       });
+      this.averageMeasures();
     });
   };
 
@@ -135,6 +138,24 @@ class App extends Component {
     );
   };
 
+  averageMeasures = () => {
+    const { selectedGroup } = this.state;
+
+    let sumTemperature = 0;
+    let sumHumidity = 0;
+    selectedGroup.measures.forEach((measure) => {
+      sumTemperature += measure.values.temperature.value;
+      sumHumidity += measure.values.humidité.value;
+    });
+
+    let numMeasures = selectedGroup.measures.length;
+
+    this.setState({
+      averageTemperature: (sumTemperature / numMeasures).toPrecision(4),
+      averageHumidity: (sumHumidity / numMeasures).toPrecision(4)
+    })
+  }
+
   handleTimeSliderChange = (value) => {
     this.setState({ minTimeShow: value[0], maxTimeShow: value[1] });
   };
@@ -144,7 +165,7 @@ class App extends Component {
   };
 
   render() {
-    const { selectedGroup, groups, terrain, markerLabel } = this.state;
+    const { selectedGroup, groups, terrain, markerLabel, averageTemperature, averageHumidity } = this.state;
     return (
       <div id="map">
         <ReactMapGl
@@ -183,6 +204,9 @@ class App extends Component {
           maxDate={this.toTimestamp(selectedGroup.end)}
           onTimeSliderChange={this.handleTimeSliderChange}
           onSelectionChange={this.handleSelectionChange}
+          selectedGroupId={selectedGroup.id}
+          averageTemperature={averageTemperature}
+          averageHumidity={averageHumidity}
         />
       </div>
     );
