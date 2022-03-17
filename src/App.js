@@ -154,9 +154,9 @@ class App extends Component {
 
     this.setState({
       averageTemperature: (sumTemperature / numMeasures).toPrecision(4),
-      averageHumidity: (sumHumidity / numMeasures).toPrecision(4)
-    })
-  }
+      averageHumidity: (sumHumidity / numMeasures).toPrecision(4),
+    });
+  };
 
   handleTimeSliderChange = (value) => {
     this.setState({ minTimeShow: value[0], maxTimeShow: value[1] });
@@ -166,8 +166,19 @@ class App extends Component {
     this.getMeasures(id);
   };
 
+  handleUpdateGroups = () => {
+    this.getGroups();
+  };
+
   render() {
-    const { selectedGroup, groups, terrain, markerLabel, averageTemperature, averageHumidity } = this.state;
+    const {
+      selectedGroup,
+      groups,
+      terrain,
+      markerLabel,
+      averageTemperature,
+      averageHumidity,
+    } = this.state;
     return (
       <div id="map">
         <ReactMapGl
@@ -209,6 +220,7 @@ class App extends Component {
           selectedGroupId={selectedGroup.id}
           averageTemperature={averageTemperature}
           averageHumidity={averageHumidity}
+          onUpdateGroups={this.handleUpdateGroups}
         />
       </div>
     );

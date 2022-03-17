@@ -10,7 +10,7 @@ class Overlay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classForm: "hidden"
+      classForm: "hidden",
     };
   }
 
@@ -24,10 +24,19 @@ class Overlay extends Component {
 
   handleFormChange = (value) => {
     this.setState({ classForm: value });
+    this.props.onUpdateGroups();
   };
 
   render() {
-    const { minDate, maxDate, groups, markerLabel, selectedGroupId, averageHumidity, averageTemperature } = this.props;
+    const {
+      minDate,
+      maxDate,
+      groups,
+      markerLabel,
+      selectedGroupId,
+      averageHumidity,
+      averageTemperature,
+    } = this.props;
     const { classForm } = this.state;
     return (
       <div className="overlay">
@@ -46,10 +55,7 @@ class Overlay extends Component {
             max={maxDate}
             onChange={this.handleTimeSliderChange}
           />
-          <Form 
-            onFormChange={this.handleFormChange}
-            className={classForm}
-          />
+          <Form onFormChange={this.handleFormChange} className={classForm} />
         </div>
       </div>
     );
