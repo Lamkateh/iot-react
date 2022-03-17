@@ -1,9 +1,14 @@
 .btn {
-    height: 50px;
+    min-height: 50px;
     background-color: #EBEEFF;
     border: none;
     color: #3519FB;
     cursor: pointer;
+    width: 100%;
+}
+
+.primary:hover {
+    background-color: #cbcbf7;
 }
 
 .secondary {
@@ -12,7 +17,7 @@
     color: #505050;
 }
 
-.secondary:hover {
+.secondary:hover, .selected {
     background-color: #EBEEFF;
     color: #3519FB;
 }
