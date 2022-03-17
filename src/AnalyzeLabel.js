@@ -13,7 +13,7 @@ class AnalyzeLabel extends Component {
               .filter((key) => !["latitude", "longitude"].includes(key))
               .map((keyName) => (
                 <tr>
-                  <td>{keyName}</td>
+                  <td className="name">{keyName.charAt(0).toUpperCase() + keyName.substring(1) + " : "}</td>
                   <td>
                     {values[keyName].value}
                     {values[keyName].unit}
