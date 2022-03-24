@@ -63,6 +63,7 @@ class App extends Component {
         }).then(function (response) {
             self.setState({
                 groups: response.data.data,
+                groupsLoading: false,
             })
         })
     }

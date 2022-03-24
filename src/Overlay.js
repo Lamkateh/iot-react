@@ -37,10 +37,12 @@ class Overlay extends Component {
             selectedGroupId,
             averageHumidity,
             averageTemperature,
+            groupsLoading,
         } = this.props
         const { classForm } = this.state
         return (
             <div className="overlay">
+                {groupsLoading ? <LoadingScreen /> : null}
                 {markerLabel ? <AnalyzeLabel values={markerLabel} /> : null}
                 <Sidebar
                     onFormChange={this.handleFormChange}
