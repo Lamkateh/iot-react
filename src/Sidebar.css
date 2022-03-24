@@ -2,6 +2,15 @@
   width: 360px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar .scroll {
+  overflow-y: auto;
+}
+
+.sidebar .scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .logo {
@@ -11,4 +20,9 @@
   font-style: italic;
   font-weight: bold;
   padding: 15px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
 }

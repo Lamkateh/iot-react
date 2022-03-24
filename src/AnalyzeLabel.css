@@ -2,5 +2,11 @@
   position: absolute;
   right: 32px;
   top: 32px;
-  padding: 40px;
+  padding: 20px;
+  font-style: italic;
+}
+
+.analyze-label .name {
+  text-align: end;
+  padding-right: 10px;
 }

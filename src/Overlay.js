@@ -8,36 +8,62 @@ import AnalyzeLabel from "./AnalyzeLabel"
 import LoadingScreen from "./LoadingScreen"
 
 class Overlay extends Component {
-	handleTimeSliderChange = (value) => {
-		this.props.onTimeSliderChange(value)
-	}
+    constructor(props) {
+        super(props)
+        this.state = {
+            classForm: "hidden",
+        }
+    }
 
-	handleSelectionChange = (id) => {
-		this.props.onSelectionChange(id)
-	}
+    handleTimeSliderChange = (value) => {
+        this.props.onTimeSliderChange(value)
+    }
 
-	render() {
-		const { minDate, maxDate, groups, markerLabel, groupsLoading } =
-			this.props
-		return (
-			<div className="overlay">
-				{groupsLoading ? <LoadingScreen /> : null}
-				{markerLabel ? <AnalyzeLabel values={markerLabel} /> : null}
-				<Sidebar
-					onSelectionChange={this.handleSelectionChange}
-					groups={groups}
-				/>
-				<div className="overlay-right">
-					<TimeSlider
-						min={minDate}
-						max={maxDate}
-						onChange={this.handleTimeSliderChange}
-					/>
-					<Form />
-				</div>
-			</div>
-		)
-	}
+    handleSelectionChange = (id) => {
+        this.props.onSelectionChange(id)
+    }
+
+    handleFormChange = (value) => {
+        this.setState({ classForm: value })
+        this.props.onUpdateGroups()
+    }
+
+    render() {
+        const {
+            minDate,
+            maxDate,
+            groups,
+            markerLabel,
+            selectedGroupId,
+            averageHumidity,
+            averageTemperature,
+        } = this.props
+        const { classForm } = this.state
+        return (
+            <div className="overlay">
+                {markerLabel ? <AnalyzeLabel values={markerLabel} /> : null}
+                <Sidebar
+                    onFormChange={this.handleFormChange}
+                    onSelectionChange={this.handleSelectionChange}
+                    groups={groups}
+                    selectedGroupId={selectedGroupId}
+                    averageTemperature={averageTemperature}
+                    averageHumidity={averageHumidity}
+                />
+                <div className="overlay-right">
+                    <TimeSlider
+                        min={minDate}
+                        max={maxDate}
+                        onChange={this.handleTimeSliderChange}
+                    />
+                    <Form
+                        onFormChange={this.handleFormChange}
+                        className={classForm}
+                    />
+                </div>
+            </div>
+        )
+    }
 }
 
 export default Overlay
