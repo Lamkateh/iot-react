@@ -7,8 +7,6 @@ import Api from "./Api"
 import bbox from "@turf/bbox"
 import { lineString } from "@turf/helpers"
 
-// test commit
-
 const mapboxAccessToken =
 	"pk.eyJ1IjoiYnJ1bm9kaWxpdmlvIiwiYSI6ImNsMDl5eWFkbTBpNzYzaW55emhmajRnbmUifQ.N52n-xAZkStMwY4Wm_u7Ug"
 
@@ -26,6 +24,7 @@ class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			groupsLoading: true,
 			groups: [],
 			noSelectedGroup: true,
 			selectedGroup: { start: 0, end: 0, measures: [] },
@@ -62,6 +61,7 @@ class App extends Component {
 		}).then(function (response) {
 			self.setState({
 				groups: response.data.data,
+				groupsLoading: false,
 			})
 		})
 	}
@@ -100,6 +100,7 @@ class App extends Component {
 					latitude={measure.values.latitude}
 				>
 					<Pin
+						isFirst={index === 0}
 						index={index}
 						onMouseEnter={this.handleMouseEnterPin}
 						onMouseLeave={this.handleMouseLeavePin}
@@ -150,7 +151,8 @@ class App extends Component {
 	}
 
 	render() {
-		const { selectedGroup, groups, terrain, markerLabel } = this.state
+		const { selectedGroup, groups, terrain, markerLabel, groupsLoading } =
+			this.state
 		return (
 			<div id="map">
 				<ReactMapGl
@@ -185,6 +187,7 @@ class App extends Component {
 					{terrain ? <Layer {...skyLayer} /> : null}
 				</ReactMapGl>
 				<Overlay
+					groupsLoading={groupsLoading}
 					markerLabel={markerLabel}
 					groups={groups}
 					minDate={this.toTimestamp(selectedGroup.start)}
